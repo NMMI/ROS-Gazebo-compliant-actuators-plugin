@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<robot name="template">
+
+    <!--World & Base -->	
+    <link name="world">
+    </link> 
+
+    <!-- Joint & Link  --> 
+    <joint name="joint" type="revolute">
+        <origin xyz="0 0 0.0501" rpy="0 0 0"/> 
+        <parent link="world"/>
+        <child link="link"/>
+        <limit effort="300" velocity="100" lower="-3.14" upper="3.14" />
+        <axis xyz="0 0 1"/>
+        <dynamics damping="0.02" friction="0.0" />
+    </joint> 
+    <link name="link">
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="1"/>
+            <inertia ixx="0.001" iyy="0.001" izz="0.002" ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+    </link>
+
+    <!-- Legend for the libsea_plugin.so custom plugin 
+    
+        # The operational modes are the following
+        #   [0] = LinkTorque
+        #   [1] = LinkPID
+        #   [2] = SpingRefs
+        #   [3] = SpringEqPres
+        #   [4] = MotorTorques
+        #   [5] = PIDRefs
+        #   [6] = PIDEqPres
+
+    -->
+    <!-- Plugin insertion -->
+    <gazebo>
+        <plugin name="qbmove_vsa_j" filename="libsea_plugin.so">
+            # REQUIRED tags
+            <joint>joint</joint>
+            <operation_mode>5</operation_mode>     # select the operational mode (see above)
+            <pub_eltau>true</pub_eltau>            # enable elastic torques publishing
+            <pub_state>true</pub_state>            # enable link state publishing
+            <sub_ext_tau>true</sub_ext_tau>        # enable subscription to external torques
+            
+            # Available OPTIONAL tags with default values are
+            <!-- spring parameters -->
+            <spring_k>10.0</spring_k>
+            <max_def>0.8</max_def>
+            <!-- motors parameters -->
+            <mot_J>0.0233</mot_J>                   # motor inertia
+            <mot_D>0.0019</mot_D>                   # motor damping
+            <mot_tauMax>6.0</mot_tauMax>            # maximum motor torque
+            <mot_maxVel>6.0</mot_maxVel>            # maximum motor velocity
+            <mot_minPos>-inf</mot_minPos>           # minimum motor position
+            <mot_maxPos>inf</mot_maxPos>            # maximum motor position
+            <mot_tauFric>0.5</mot_tauFric>          # static motor friction 
+            <!-- controllers parameters -->
+            <ctrl_P>400</ctrl_P>                    # proportional gain on motor
+            <ctrl_I>0</ctrl_I>                      # integral gain on motor
+            <ctrl_D>50</ctrl_D>                     # derivative gain on motor
+        </plugin>
+    </gazebo>
+
+</robot>
