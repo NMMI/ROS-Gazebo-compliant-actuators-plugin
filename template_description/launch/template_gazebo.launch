@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+	
+	<!-- start gazebo server with empty world -->
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+		<arg name="paused" value="true"/>
+	</include>
+	
+  	<!-- Load the parameter for the compliant plugin from the configuration file -->
+  	<rosparam command="load" file="$(find template_description)/config/compliant_config.yaml"/>
+<!-- 	<node pkg="plugin_manager" name="plugin_manager_node" type="plugin_manager_node" output="screen"/>
+ -->
+	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find template_description)/urdf/template.urdf'"/>
+
+	<arg name="x" default="0"/>
+	<arg name="y" default="0"/>
+	<arg name="z" default="0.09"/>
+
+	<node name="my_robot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
+		args="-urdf -param robot_description -model template_description -x $(arg x) -y $(arg y) -z $(arg z)"/>
+
+	<!-- calculate, publish and remap joint_states -->
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+		respawn="false" output="screen">
+		<remap from="/joint_states" to="/template/joint_states" /> 
+	</node> 
+	
+</launch>
+
+
+
+

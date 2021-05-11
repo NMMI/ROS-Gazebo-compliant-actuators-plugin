@@ -1,0 +1,20 @@
+## Namespace of the robot
+namespace: "template_robot"      # default = "toBEassigend"
+
+## Sample time
+T_sample: 0.01
+
+## Number of qbAdvance Motors
+joints_number: 1
+
+## Joints name
+joints_name: 
+ - "joint1"
+ 
+## topic names to which publish the references 
+ref1_topic_name: 
+ - '/tau_m1_command'
+
+ref2_topic_name: 
+ - '/tau_m2_command'
+
