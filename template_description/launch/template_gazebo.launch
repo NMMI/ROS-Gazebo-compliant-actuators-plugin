@@ -9,8 +9,8 @@
 	
   	<!-- Load the parameter for the compliant plugin from the configuration file -->
   	<rosparam command="load" file="$(find template_description)/config/compliant_config.yaml"/>
-<!-- 	<node pkg="plugin_manager" name="plugin_manager_node" type="plugin_manager_node" output="screen"/>
- -->
+	<node pkg="plugin_manager" name="plugin_manager_node" type="plugin_manager_node" output="screen"/>
+
 	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find template_description)/urdf/template.urdf'"/>
 
 	<arg name="x" default="0"/>

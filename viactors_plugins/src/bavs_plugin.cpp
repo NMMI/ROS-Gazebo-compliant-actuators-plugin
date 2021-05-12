@@ -51,24 +51,24 @@ void BAVSPlugin::InitParams(sdf::ElementPtr _sdf){
     INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.maxVel, _sdf, "mot_1_maxVel", 0.0019 )   // rad/s
     INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.minPos, _sdf, "mot_1_minPos", -std::numeric_limits<double>::infinity() ) // rad
     INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.maxPos, _sdf, "mot_1_maxPos", std::numeric_limits<double>::infinity() ) // rad
-    INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.J, _sdf, "mot_1_tauFric", 0.5 ) // N m  (to check)
+    INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.tauFric, _sdf, "mot_1_tauFric", 0.5 ) // N m  (to check)
 
     INITIALIZE_PARAMETER_FROM_TAG( double, mot_2.J, _sdf, "mot_2_J", 0.0233 ) //kg m^2
     INITIALIZE_PARAMETER_FROM_TAG( double, mot_2.D, _sdf, "mot_2_D", 0.0019 ) //N m /(m/s)
     INITIALIZE_PARAMETER_FROM_TAG( double, mot_2.tauMax, _sdf, "mot_2_tauMax", 6.0 )  // N m
-    INITIALIZE_PARAMETER_FROM_TAG( double, mot_2.maxVel, _sdf, "mot_2_maxVel", 0.0019 ) // rad/s
+    INITIALIZE_PARAMETER_FROM_TAG( double, mot_2.maxVel, _sdf, "mot_2_maxVel", 6.0 ) // rad/s
     INITIALIZE_PARAMETER_FROM_TAG( double, mot_2.minPos, _sdf, "mot_2_minPos", -std::numeric_limits<double>::infinity() )  // rad
     INITIALIZE_PARAMETER_FROM_TAG( double, mot_2.maxPos, _sdf, "mot_2_maxPos", std::numeric_limits<double>::infinity() ) // rad
-    INITIALIZE_PARAMETER_FROM_TAG( double, mot_2.J, _sdf, "mot_2_tauFric", 0.5 )
+    INITIALIZE_PARAMETER_FROM_TAG( double, mot_2.tauFric, _sdf, "mot_2_tauFric", 0.5 )
 
     //controllers parameters
-    INITIALIZE_PARAMETER_FROM_TAG( double, ctrl_1.P, _sdf, "ctrl_1_P", 250.0 )
+    INITIALIZE_PARAMETER_FROM_TAG( double, ctrl_1.P, _sdf, "ctrl_1_P", 125.0 )
     INITIALIZE_PARAMETER_FROM_TAG( double, ctrl_1.I, _sdf, "ctrl_1_I", 0.0 )
-    INITIALIZE_PARAMETER_FROM_TAG( double, ctrl_1.D, _sdf, "ctrl_1_D", 40.0 )
+    INITIALIZE_PARAMETER_FROM_TAG( double, ctrl_1.D, _sdf, "ctrl_1_D", 4.5 )
 
-    INITIALIZE_PARAMETER_FROM_TAG( double, ctrl_2.P, _sdf, "ctrl_2_P", 250.0 )
+    INITIALIZE_PARAMETER_FROM_TAG( double, ctrl_2.P, _sdf, "ctrl_2_P", 125.0 )
     INITIALIZE_PARAMETER_FROM_TAG( double, ctrl_2.I, _sdf, "ctrl_2_I", 0.0 )
-    INITIALIZE_PARAMETER_FROM_TAG( double, ctrl_2.D, _sdf, "ctrl_2_D", 40.0 )
+    INITIALIZE_PARAMETER_FROM_TAG( double, ctrl_2.D, _sdf, "ctrl_2_D", 4.5 )
 
     // Change control
     if (operationMode == LinkPID){

@@ -68,13 +68,13 @@
             <mot_2_maxPos>inf</mot_2_maxPos>
             <mot_2_tauFric>0.5</mot_2_tauFric>
             <!-- controllers parameters -->
-            <ctrl_1_P>400</ctrl_1_P>                # proportional gain on motor
+            <ctrl_1_P>125</ctrl_1_P>                # proportional gain on motor
             <ctrl_1_I>0</ctrl_1_I>                  # integral gain on motor
-            <ctrl_1_D>50</ctrl_1_D>                 # derivative gain on motor
+            <ctrl_1_D>4.5</ctrl_1_D>                 # derivative gain on motor
             <!--  -->
-            <ctrl_2_P>400</ctrl_2_P>                
+            <ctrl_2_P>125</ctrl_2_P>                
             <ctrl_2_I>0</ctrl_2_I>
-            <ctrl_2_D>50</ctrl_2_D>
+            <ctrl_2_D>4.5</ctrl_2_D>
         </plugin>
     </gazebo>
 

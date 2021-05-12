@@ -60,9 +60,9 @@
             <mot_maxPos>inf</mot_maxPos>            # maximum motor position
             <mot_tauFric>0.5</mot_tauFric>          # static motor friction 
             <!-- controllers parameters -->
-            <ctrl_P>400</ctrl_P>                    # proportional gain on motor
+            <ctrl_P>125</ctrl_P>                    # proportional gain on motor
             <ctrl_I>0</ctrl_I>                      # integral gain on motor
-            <ctrl_D>50</ctrl_D>                     # derivative gain on motor
+            <ctrl_D>4.5</ctrl_D>                     # derivative gain on motor
         </plugin>
     </gazebo>
 

@@ -64,7 +64,7 @@
     <gazebo>
         <plugin name="compliant_act_j1" filename="libqbmove_plugin.so">
             <joint>joint</joint>
-            <operation_mode>1</operation_mode>
+            <operation_mode>5</operation_mode>
             <pub_eltau>true</pub_eltau>
             <pub_state>true</pub_state>
             <sub_ext_tau>false</sub_ext_tau>

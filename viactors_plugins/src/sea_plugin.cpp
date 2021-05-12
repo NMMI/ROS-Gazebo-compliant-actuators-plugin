@@ -41,15 +41,15 @@ void SEAPlugin::InitParams(sdf::ElementPtr _sdf){
     INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.J, _sdf, "mot_J", 0.0233 ) //kg m^2
     INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.D, _sdf, "mot_D", 0.0019 ) //N m /(m/s)
     INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.tauMax, _sdf, "mot_tauMax", 6.0 ) // N m
-    INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.maxVel, _sdf, "mot_maxVel", 0.0019 )   // rad/s
+    INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.maxVel, _sdf, "mot_maxVel", 6.0 )   // rad/s
     INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.minPos, _sdf, "mot_minPos", -std::numeric_limits<double>::infinity() ) // rad
     INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.maxPos, _sdf, "mot_maxPos", std::numeric_limits<double>::infinity() ) // rad
-    INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.J, _sdf, "mot_tauFric", 0.5 ) // N m  (to check)
+    INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.tauFric, _sdf, "mot_tauFric", 0.5 ) // N m  (to check)
 
     //controllers parameters
-    INITIALIZE_PARAMETER_FROM_TAG( double, ctrl_1.P, _sdf, "ctrl_P", 250.0 )
+    INITIALIZE_PARAMETER_FROM_TAG( double, ctrl_1.P, _sdf, "ctrl_P", 125.0 )
     INITIALIZE_PARAMETER_FROM_TAG( double, ctrl_1.I, _sdf, "ctrl_I", 0.0 )
-    INITIALIZE_PARAMETER_FROM_TAG( double, ctrl_1.D, _sdf, "ctrl_D", 40.0 )
+    INITIALIZE_PARAMETER_FROM_TAG( double, ctrl_1.D, _sdf, "ctrl_D", 4.5 )
 
     // Change control
     if (operationMode == LinkPID){
