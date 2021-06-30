@@ -119,7 +119,7 @@ void CompliantActuatorPlugin::OnUpdatePIDEqPres(const common::UpdateInfo & info)
     double dT = (t - oldTime).Double();
 
     //retrieve joint state
-    const double & qL = joint->Position(0);
+    const double & qL = joint->GetAngle(0).Radian();
     const double & dqL = joint->GetVelocity(0);
 
     //calculate motor references
@@ -164,7 +164,7 @@ void CompliantActuatorPlugin::OnUpdatePIDRefs(const common::UpdateInfo & info){
     double dT = (t - oldTime).Double();
 
     //retrieve joint state
-    const double & qL = joint->Position(0);
+    const double & qL = joint->GetAngle(0).Radian();
     const double & dqL = joint->GetVelocity(0);
 
 
@@ -206,7 +206,7 @@ void CompliantActuatorPlugin::OnUpdateMotorTorques(const common::UpdateInfo & in
     double dT = (t - oldTime).Double();
 
     //retrieve joint state
-    const double & qL = joint->Position(0);
+    const double & qL = joint->GetAngle(0).Radian();
     const double & dqL = joint->GetVelocity(0);
 
     // compute old elastic torque
@@ -241,7 +241,7 @@ void CompliantActuatorPlugin::OnUpdateSpringEqPres(const common::UpdateInfo & in
     double dT = (t - oldTime).Double();
 
     //retrieve joint state
-    const double & qL = joint->Position(0);
+    const double & qL = joint->GetAngle(0).Radian();
     const double & dqL = joint->GetVelocity(0);
 
     //calculate motor references
@@ -270,7 +270,7 @@ void CompliantActuatorPlugin::OnUpdateSpringRefs(const common::UpdateInfo & info
     double dT = (t - oldTime).Double();
 
     //retrieve joint state
-    const double & qL = joint->Position(0);
+    const double & qL = joint->GetAngle(0).Radian();
     const double & dqL = joint->GetVelocity(0);
 
     // compute new elastic torque
@@ -295,7 +295,7 @@ void CompliantActuatorPlugin::OnUpdateLinkPID(const common::UpdateInfo & info){
     double dT = (t - oldTime).Double();
 
     //retrieve joint state
-    const double & qL = joint->Position(0);
+    const double & qL = joint->GetAngle(0).Radian();
     const double & dqL = joint->GetVelocity(0);
 
     // update controllers
@@ -323,7 +323,7 @@ void CompliantActuatorPlugin::OnUpdateLinkTorque(const common::UpdateInfo & info
     double dT = (t - oldTime).Double();
 
     //retrieve joint state
-    const double & qL = joint->Position(0);
+    const double & qL = joint->GetAngle(0).Radian();
     const double & dqL = joint->GetVelocity(0);
 
     // update joint effort
