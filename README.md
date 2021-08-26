@@ -56,11 +56,12 @@ The results were published in "Frontiers in Robotics and AI (Sim2Real Research T
 
 If you use this toolbox in your work and you want to cite it, please use the following.
 ```
-@article{mengacciopen,
+@article{mengacci2021open,
   title={An Open-Source ROS-Gazebo Toolbox for Simulating Robots with Compliant Actuators},
-  author={Mengacci, Riccardo and Zambella, Grazia and Grioli, Giorgio and Caporale, Danilo and Catalano, Manuel and Bicchi, Antonio},
+  author={Mengacci, Riccardo and Zambella, Grazia and Grioli, Giorgio and Caporale, Danilo and Catalano, Manuel G and Bicchi, Antonio},
   journal={Frontiers in Robotics and AI},
   pages={246},
+  year={2021},
   publisher={Frontiers}
 }
 ```
