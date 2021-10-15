@@ -112,6 +112,7 @@ void CompliantActuatorPlugin::getExtTau_callback(const std_msgs::Float64& e_tau)
     ext_tau = e_tau.data;
 }
 
+// OPERATION MODE = 6
 void CompliantActuatorPlugin::OnUpdatePIDEqPres(const common::UpdateInfo & info){
 
     // retrieve simulation time
@@ -157,6 +158,7 @@ void CompliantActuatorPlugin::OnUpdatePIDEqPres(const common::UpdateInfo & info)
 
 }
 
+// OPERATION MODE = 5
 void CompliantActuatorPlugin::OnUpdatePIDRefs(const common::UpdateInfo & info){
 
     // retrieve simulation time
@@ -199,6 +201,7 @@ void CompliantActuatorPlugin::OnUpdatePIDRefs(const common::UpdateInfo & info){
 
 }
 
+// OPERATION MODE = 4
 void CompliantActuatorPlugin::OnUpdateMotorTorques(const common::UpdateInfo & info){
 
     // retrieve simulation time
@@ -234,6 +237,7 @@ void CompliantActuatorPlugin::OnUpdateMotorTorques(const common::UpdateInfo & in
 
 }
 
+// OPERATION MODE = 3
 void CompliantActuatorPlugin::OnUpdateSpringEqPres(const common::UpdateInfo & info){
 
     // retrieve simulation time
@@ -263,6 +267,7 @@ void CompliantActuatorPlugin::OnUpdateSpringEqPres(const common::UpdateInfo & in
 
 }
 
+// OPERATION MODE = 2
 void CompliantActuatorPlugin::OnUpdateSpringRefs(const common::UpdateInfo & info){
 
     // retrieve simulation time
@@ -288,6 +293,7 @@ void CompliantActuatorPlugin::OnUpdateSpringRefs(const common::UpdateInfo & info
 
 }
 
+// OPERATION MODE = 1
 void CompliantActuatorPlugin::OnUpdateLinkPID(const common::UpdateInfo & info){
 
     // retrieve simulation time
@@ -316,6 +322,7 @@ void CompliantActuatorPlugin::OnUpdateLinkPID(const common::UpdateInfo & info){
 
 }
 
+// OPERATION MODE = 0
 void CompliantActuatorPlugin::OnUpdateLinkTorque(const common::UpdateInfo & info){
 
     // retrieve simulation time
