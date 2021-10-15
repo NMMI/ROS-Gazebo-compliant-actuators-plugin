@@ -112,6 +112,21 @@ void CompliantActuatorPlugin::getExtTau_callback(const std_msgs::Float64& e_tau)
     ext_tau = e_tau.data;
 }
 
+// DEBUG PRINT FUNCTION 
+void printForDebug(double tauEl_1, double tauEl_2, double tEl_L, double mot_1, double mot_2, double qL, double ref_1, double ref_2)
+{
+    std::cout << "T1 " << tauEl_1 << "\t";
+    std::cout << "T2 " << tauEl_2 << "\t";
+    std::cout << "TL " << tEl_L << "\t";
+
+    std::cout << "M1 " << mot_1 << "\t";
+    std::cout << "M2 " << mot_2 << "\t";
+
+    std::cout << "Q " << qL << "\t";
+    std::cout << "R1 " << ref_1 << "\t";
+    std::cout << "R2 " << ref_2 << "\n";
+}
+
 // OPERATION MODE = 6
 void CompliantActuatorPlugin::OnUpdatePIDEqPres(const common::UpdateInfo & info){
 
@@ -217,19 +232,26 @@ void CompliantActuatorPlugin::OnUpdateMotorTorques(const common::UpdateInfo & in
     tauElastic(mot_1.pos, mot_2.pos, qL, tauEl_1_old, tauEl_2_old, tEl_L_old, sigmaEl_L_old);
 
     //update motors
-    mot_1.OnUpdate(dT, ref_1, tauEl_1_old);
-    mot_2.OnUpdate(dT, ref_2, tauEl_2_old);
-
+    mot_1.OnUpdate(dT, ref_1, -tauEl_1_old);
+    mot_2.OnUpdate(dT, ref_2, -tauEl_2_old);
 
     // compute new elastic torque
     double tauEl_1, tauEl_2, tEl_L, sigmaEl_L;
     tauElastic(mot_1.pos, mot_2.pos, qL, tauEl_1, tauEl_2, tEl_L, sigmaEl_L);
 
+    //update motors
+    mot_1.OnUpdate(dT, ref_1, -tauEl_1);
+    mot_2.OnUpdate(dT, ref_2, -tauEl_2);
+
+    // DEBUG
+    // printForDebug(mot_1.effort, mot_2.effort, tEl_L, mot_1.pos, mot_2.pos, qL, ref_1, ref_2);
+    // END_DEBUG
+    
     // update joint effort
     joint->SetForce(0, tEl_L);
 
     // publish relevant topics
-    CompliantActuatorPlugin::Publish(tauEl_1, tauEl_2, tEl_L, sigmaEl_L, qL, dqL, ref_1, ref_2 );
+    CompliantActuatorPlugin::Publish(tauEl_1, tauEl_2, tEl_L, sigmaEl_L, qL, dqL, ref_1, ref_2);
     PublishMotors();
 
     // update timer

@@ -194,11 +194,14 @@ void Initialization(ros::NodeHandle n_)
 int main(int argc, char **argv)
 {
   ros::init(argc, argv, "plugin_manager_node");
-  
+
   ros::NodeHandle n_;
   
   Initialization(n_);
  
+  std::string start_msg = "Plugin manager started on " + ns_name;
+  ROS_WARN_STREAM(start_msg);
+
   ros::Rate r(1/T_sample);
 
   while(ros::ok())

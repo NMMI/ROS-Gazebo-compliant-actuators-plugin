@@ -32,6 +32,9 @@ void AwASActuatorPlugin::eqPres2Refs(const double & eq_in, const double & pres_i
 // Initialize all parameters
 void AwASActuatorPlugin::InitParams(sdf::ElementPtr _sdf){
 
+    // Show the actuator type for info
+    ROS_WARN_STREAM("Actuator type: AWAS-II");
+
     // Setup default parameter values
     //springs parameters
     INITIALIZE_PARAMETER_FROM_TAG( double, Ks, _sdf, "spring_Ks", 10 ) // 1 /rad
@@ -42,12 +45,12 @@ void AwASActuatorPlugin::InitParams(sdf::ElementPtr _sdf){
 
     // motors parameters
     INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.J, _sdf, "mot_J", 0.0233 ) //kg m^2
-    INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.D, _sdf, "mot_D", 0.0019 ) //N m /(m/s)
+    INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.D, _sdf, "mot_D", 0.2698 ) //N m /(m/s)
     INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.tauMax, _sdf, "mot_tauMax", 6.0 ) // N m
     INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.maxVel, _sdf, "mot_maxVel", 6.0 )   // rad/s
     INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.minPos, _sdf, "mot_minPos", -std::numeric_limits<double>::infinity() ) // rad
     INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.maxPos, _sdf, "mot_maxPos", std::numeric_limits<double>::infinity() ) // rad
-    INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.tauFric, _sdf, "mot_tauFric", 0.5 ) // N m  (to check)
+    INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.tauFric, _sdf, "mot_tauFric", 0.0 ) // N m  (to check)
 
     //controllers parameters
     INITIALIZE_PARAMETER_FROM_TAG( double, ctrl_1.P, _sdf, "ctrl_P", 125.0 )
