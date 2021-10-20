@@ -138,7 +138,7 @@ namespace gazebo{
                                       const double & q, const double & dq,
                                       const double & r_1, const double & r_2 );
 
-    void PublishMotors();
+    void PublishMotors(double m1_pos, double m1_vel, double m1_eff, double m2_pos, double m2_vel, double m2_eff);
     void topicNames(std::string ns_name, std::string joint_name);
 
     // ROS handle

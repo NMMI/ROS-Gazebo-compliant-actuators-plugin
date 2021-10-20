@@ -45,8 +45,8 @@ void CompliantActuatorPlugin::DCMotor::OnUpdate(const double & dT, double & tauM
 
     double tauFricNow = K *(pos - w);
 
-    effort = - D*vel + tauMot + tauLoad + tauFricNow;
-    double acc = effort / J;
+    effort = tauMot;
+    double acc = (effort - tauLoad - tauFricNow - D*vel)/ J;
 
     vel = vel + acc * dT;
 
@@ -166,7 +166,7 @@ void CompliantActuatorPlugin::OnUpdatePIDEqPres(const common::UpdateInfo & info)
 
     // publish relevant topics
     CompliantActuatorPlugin::Publish(tauEl_1, tauEl_2, tEl_L, sigmaEl_L, qL, dqL, ref_1, ref_2 );
-    CompliantActuatorPlugin::PublishMotors();
+    CompliantActuatorPlugin::PublishMotors(mot_1.pos, mot_1.vel, mot_1.effort, mot_2.pos, mot_2.vel, mot_2.effort);
 
     // update timer
     oldTime = t;
@@ -209,7 +209,7 @@ void CompliantActuatorPlugin::OnUpdatePIDRefs(const common::UpdateInfo & info){
 
     // publish relevant topics
     CompliantActuatorPlugin::Publish(tauEl_1, tauEl_2, tEl_L, sigmaEl_L, qL, dqL, ref_1, ref_2 );
-    CompliantActuatorPlugin::PublishMotors();
+    CompliantActuatorPlugin::PublishMotors(mot_1.pos, mot_1.vel, mot_1.effort, mot_2.pos, mot_2.vel, mot_2.effort);
 
     // update timer
     oldTime = t;
@@ -232,16 +232,16 @@ void CompliantActuatorPlugin::OnUpdateMotorTorques(const common::UpdateInfo & in
     tauElastic(mot_1.pos, mot_2.pos, qL, tauEl_1_old, tauEl_2_old, tEl_L_old, sigmaEl_L_old);
 
     //update motors
-    mot_1.OnUpdate(dT, ref_1, -tauEl_1_old);
-    mot_2.OnUpdate(dT, ref_2, -tauEl_2_old);
+    mot_1.OnUpdate(dT, ref_1, tauEl_1_old);
+    mot_2.OnUpdate(dT, ref_2, tauEl_2_old);
 
     // compute new elastic torque
     double tauEl_1, tauEl_2, tEl_L, sigmaEl_L;
     tauElastic(mot_1.pos, mot_2.pos, qL, tauEl_1, tauEl_2, tEl_L, sigmaEl_L);
 
     //update motors
-    mot_1.OnUpdate(dT, ref_1, -tauEl_1);
-    mot_2.OnUpdate(dT, ref_2, -tauEl_2);
+    mot_1.OnUpdate(dT, ref_1, tauEl_1);
+    mot_2.OnUpdate(dT, ref_2, tauEl_2);
 
     // DEBUG
     // printForDebug(mot_1.effort, mot_2.effort, tEl_L, mot_1.pos, mot_2.pos, qL, ref_1, ref_2);
@@ -252,7 +252,7 @@ void CompliantActuatorPlugin::OnUpdateMotorTorques(const common::UpdateInfo & in
 
     // publish relevant topics
     CompliantActuatorPlugin::Publish(tauEl_1, tauEl_2, tEl_L, sigmaEl_L, qL, dqL, ref_1, ref_2);
-    PublishMotors();
+    CompliantActuatorPlugin::PublishMotors(mot_1.pos, mot_1.vel, mot_1.effort, mot_2.pos, mot_2.vel, mot_2.effort);
 
     // update timer
     oldTime = t;
@@ -309,7 +309,7 @@ void CompliantActuatorPlugin::OnUpdateSpringRefs(const common::UpdateInfo & info
 
     // publish relevant topics
     CompliantActuatorPlugin::Publish(tauEl_1, tauEl_2, tEl_L, sigmaEl_L, qL, dqL, ref_1, ref_2 );
-
+    
     // update timer
     oldTime = t;
 
@@ -427,15 +427,15 @@ void CompliantActuatorPlugin::Publish(const double & tauEl_1,
 
 }
 
-void CompliantActuatorPlugin::PublishMotors(){
-  mot_1_state.position[0] = mot_1.pos;
-  mot_1_state.velocity[0] = mot_1.vel;
-  mot_1_state.effort[0] = mot_1.effort;
+void CompliantActuatorPlugin::PublishMotors(double m1_pos, double m1_vel, double m1_eff, double m2_pos, double m2_vel, double m2_eff){
+  mot_1_state.position[0] = m1_pos;
+  mot_1_state.velocity[0] = m1_vel;
+  mot_1_state.effort[0] = m1_eff;
   pub_mot_1_state.publish(mot_1_state);
 
-  mot_2_state.position[0] = mot_2.pos;
-  mot_2_state.velocity[0] = mot_2.vel;
-  mot_2_state.effort[0] = mot_2.effort;
+  mot_2_state.position[0] = m2_pos;
+  mot_2_state.velocity[0] = m2_vel;
+  mot_2_state.effort[0] = m2_eff;
   pub_mot_2_state.publish(mot_2_state);
 }
 

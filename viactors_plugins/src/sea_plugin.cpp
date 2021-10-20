@@ -47,7 +47,7 @@ void SEAPlugin::InitParams(sdf::ElementPtr _sdf){
     INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.maxVel, _sdf, "mot_maxVel", 6.0 )   // rad/s
     INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.minPos, _sdf, "mot_minPos", -std::numeric_limits<double>::infinity() ) // rad
     INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.maxPos, _sdf, "mot_maxPos", std::numeric_limits<double>::infinity() ) // rad
-    INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.tauFric, _sdf, "mot_tauFric", 0.0 ) // N m  (to check)
+    INITIALIZE_PARAMETER_FROM_TAG( double, mot_1.tauFric, _sdf, "mot_tauFric", 0.02 ) // N m  (to check)
 
     //controllers parameters
     INITIALIZE_PARAMETER_FROM_TAG( double, ctrl_1.P, _sdf, "ctrl_P", 125.0 )

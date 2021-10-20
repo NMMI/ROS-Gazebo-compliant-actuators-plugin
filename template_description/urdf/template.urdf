@@ -61,7 +61,7 @@
     </link>
 
     <!-- Custom plugin inseriton -->
-    <gazebo>
+<!--     <gazebo>
         <plugin name="compliant_act_j1" filename="libqbmove_plugin.so">
             <joint>joint</joint>
             <operation_mode>4</operation_mode>
@@ -69,9 +69,9 @@
             <pub_state>true</pub_state>
             <sub_ext_tau>false</sub_ext_tau>
         </plugin>
-    </gazebo>
+    </gazebo> -->
 
-<!--     <gazebo>
+    <gazebo>
         <plugin name="compliant_act_j1" filename="libsea_plugin.so">
             <joint>joint</joint>
             <operation_mode>4</operation_mode>
@@ -79,7 +79,7 @@
             <pub_state>true</pub_state>
             <sub_ext_tau>false</sub_ext_tau>
         </plugin>
-    </gazebo> -->
+    </gazebo>
 
 <!--     <gazebo>
         <plugin name="compliant_act_j1" filename="libbavs_plugin.so">
