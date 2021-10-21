@@ -1,7 +1,9 @@
 # RQT-MULTIPLOT Example
 ## Overview
-This is a simple usage example of the package [rqt_multiplot](http://wiki.ros.org/rqt_multiplot)
+This is a simple usage example of the package [rqt_multiplot](http://wiki.ros.org/rqt_multiplot).
+
 Click on the link to quickly discover how to use this package.
+
 This configuration file will display all the information contained in the motor_1_state and motor_2_state ROStopics.
 
 
