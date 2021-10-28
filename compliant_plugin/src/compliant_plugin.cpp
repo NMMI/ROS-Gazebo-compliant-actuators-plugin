@@ -14,7 +14,9 @@ using namespace gazebo;
 using namespace std;
 
 /*
-  TO ADD DESCRIPTION
+  This code implements the methods of the CompliantActuatorPlugin class.
+  For more details please refer to the article "An Open-Source ROS-Gazebo Toolbox for Simulating Robots With Compliant Actuators"
+  by Mengacci et. al., published in Frontiers in Robotics and AI in 2021.
 */
 
 // Saturation for input torque
@@ -156,7 +158,6 @@ void CompliantActuatorPlugin::OnUpdatePIDEqPres(const common::UpdateInfo & info)
     mot_1.OnUpdate(dT, ctrl_1.effort, tauEl_1_old);
     mot_2.OnUpdate(dT, ctrl_2.effort, tauEl_2_old);
 
-
     // compute new elastic torque
     double tauEl_1, tauEl_2, tEl_L, sigmaEl_L;
     tauElastic(mot_1.pos, mot_2.pos, qL, tauEl_1, tauEl_2, tEl_L, sigmaEl_L);
@@ -184,7 +185,6 @@ void CompliantActuatorPlugin::OnUpdatePIDRefs(const common::UpdateInfo & info){
     const double & qL = joint->Position(0);
     const double & dqL = joint->GetVelocity(0);
 
-
     // update controllers
     ctrl_1.posRef = ref_1;
     ctrl_2.posRef = ref_2;
@@ -198,7 +198,6 @@ void CompliantActuatorPlugin::OnUpdatePIDRefs(const common::UpdateInfo & info){
     //update motors
     mot_1.OnUpdate(dT, ctrl_1.effort, tauEl_1_old);
     mot_2.OnUpdate(dT, ctrl_2.effort, tauEl_2_old);
-
 
     // compute new elastic torque
     double tauEl_1, tauEl_2, tEl_L, sigmaEl_L;
@@ -227,15 +226,7 @@ void CompliantActuatorPlugin::OnUpdateMotorTorques(const common::UpdateInfo & in
     const double & qL = joint->Position(0);
     const double & dqL = joint->GetVelocity(0);
 
-    // compute old elastic torque
-    double tauEl_1_old, tauEl_2_old, tEl_L_old, sigmaEl_L_old;
-    tauElastic(mot_1.pos, mot_2.pos, qL, tauEl_1_old, tauEl_2_old, tEl_L_old, sigmaEl_L_old);
-
-    //update motors
-    mot_1.OnUpdate(dT, ref_1, tauEl_1_old);
-    mot_2.OnUpdate(dT, ref_2, tauEl_2_old);
-
-    // compute new elastic torque
+    // compute elastic torque
     double tauEl_1, tauEl_2, tEl_L, sigmaEl_L;
     tauElastic(mot_1.pos, mot_2.pos, qL, tauEl_1, tauEl_2, tEl_L, sigmaEl_L);
 
