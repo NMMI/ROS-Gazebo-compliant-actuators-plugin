@@ -36,6 +36,9 @@ A simple example of usage is given inside the folder *template_description/* tha
 roslaunch template_description template_gazebo.launch
 ```
 
+## Change Gazebo simulation time
+If you want to change the Gazebo simulation time, used also to simulate the dynamics of the motors, set the <max_step_size> in the *.world* file, following the example in the *template_robot* package.
+
 ## How to implement custom plugin
 To implement another compliant actuator plugin, according to the [article](https://www.frontiersin.org/articles/10.3389/frobt.2021.713083/full?&field=&journalName=Frontiers_in_Robotics_and_AI&id=713083), you have to implement the code of the virtual functions for your compliant actuation model.
 A template example is given in the file named *template_plugin.cpp* inside the folder  *viactors_plugins/src/*.
